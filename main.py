@@ -108,6 +108,7 @@ def add_checkers():
 def check_connect_four(vertical_count, eng_color):
     global is_won
     horizontal_pos = []
+    total_checkers = 0
     for col_data in checkers_pos:
         for row_data in col_data:
             # Vertical Scan
@@ -120,9 +121,12 @@ def check_connect_four(vertical_count, eng_color):
                 horizontal_pos.append((row_data.row, row_data.column))
             else:
                 vertical_count = 0
-
+            total_checkers += 1
         # Reset Vertical
         vertical_count = 0        
+
+    if total_checkers >= (ROWS*COLUMN):
+        is_won = 'DRAW'
 
     # Horizontal Scan
     horizontal_pos.sort()
@@ -186,13 +190,19 @@ def update_checkers():
     if is_won:
         text_2 = font_2.render('Press Enter to Restart',True, 'white')
         if is_won == 'RED':
-            text_1 = font_1.render(f"{is_won} Won!",True, RED)
+            text_1 = font_1.render(f"{is_won} Won",True, RED)
             screen.blit(text_1,(SCREEN_WIDTH//2.9,30))
             screen.blit(text_2,(SCREEN_WIDTH//4.4,100))
             reset()
-        else:
-            text_1 = font_1.render(f"{is_won} Won!",True, YELLOW)
+        elif is_won == 'YELLOW':
+            text_1 = font_1.render(f"{is_won} Won",True, YELLOW)
             screen.blit(text_1,(SCREEN_WIDTH//3.4,30))
+            screen.blit(text_2,(SCREEN_WIDTH//4.5,100))
+            reset()
+
+        else:
+            text_1 = font_1.render("DRAW",True, 'white')
+            screen.blit(text_1,(SCREEN_WIDTH//2.5,30))
             screen.blit(text_2,(SCREEN_WIDTH//4.5,100))
             reset()
 
