@@ -161,7 +161,6 @@ def reset():
     global player_color,click_delay_count,check_win, is_won, checkers_pos, vertical_count
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RETURN]:
-        print(1)
         player_color = random.choice((RED, YELLOW))
         click_delay_count = 0
         check_win = False
@@ -221,3 +220,4 @@ while run:
 
     pygame.display.update()
     clock.tick(FPS)
+
